@@ -14,11 +14,12 @@ use Laravel\Fortify\Rules\Password;
 class UserController extends Controller
 {
     public function register(Request $request){
+        // dd('tes');
         try {
             $request->validate([
                 'name' => ['required', 'string', 'max:255'],
                 'username' => ['required',  'string', 'max:255', 'unique:users'],
-                'phone' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
+                // 'phone' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8']
             ]);
@@ -42,6 +43,8 @@ class UserController extends Controller
             ], 'User registered');
 
         } catch (Exception $error) {
+
+            // return $error;
             return ResponseFormatter::error([
                 'message' => 'Something went wrong',
                 'error' => $error
